@@ -16,7 +16,6 @@ A through F.
 #include <math.h>
 
 void hexToint(char s1[]);
-void psl(char a[]);
 
 int main(void)
 {
