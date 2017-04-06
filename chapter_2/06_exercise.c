@@ -3,11 +3,25 @@
 	CV14
 	MUTD209
 
-Write a program to determine the
-ranges of char, short, int and long variables,
-both sgined and unsigned by printing appropiate values 
-from the standard headers and by direct computation.
-Harder if you compute them: determine the ranges of the various
-floating- point types.
+Write a function setbits(x,p,n,y) that returns 
+x with the n bits that begin at position p set
+to the rightmost n bits of y, leaving the other
+bits unchanged. 
 
 ************************/
+#include<stdio.h>
+
+unsigned setbits(unsigned x,int p,int n,unsigned y);
+
+int main(){
+	
+	printf("%u",setbits((unsigned)14,4,2,(unsigned)57));
+	printf("\n");
+
+}
+
+unsigned setbits(unsigned x,int p,int n,unsigned y)
+{
+    return (x & ~(~(~0 << n) << (p+1-n))) | ( y & ~(~0<<n)) << (p+1-n);
+}
+
