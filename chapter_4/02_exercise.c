@@ -6,19 +6,19 @@ exponent.
 
 cv14 */
 
-/* Exercise 4-2. Extend atof to handle scientific notation of the form
-   123.45e-6
-where a floating-point number may be followed by e or E and an optionally signed exponent.
-*/
-
 #include <stdio.h>
 #include <ctype.h>
+#include <math.h>
 
 double atof(char s[]);
 
 int main(void)
 {
-	printf("%f\n", atof("  123.45e-6"));
+  printf("%f\n", atof("123.0245"));
+	printf("%f\n", atof(" 123.89e-6"));
+  //printf("%f\n", atof("1288644.345e-5.337"));
+  //to solve this apply the same rule for after e.
+
 
 }
 
@@ -45,5 +45,19 @@ double atof(char s[])
       val = 10.0 * val + (s[i] - '0');
       power *= 10.0;
   }
-  return sign * val / power;
+
+  val = sign * val / power;
+
+
+  if(s[i] == 'e' || s[i] == 'E'){
+    i++;
+    if(s[i++] == '-'){
+      power = pow(10,s[i] - '0');
+    }else if(s[i++] == '+'){
+          power = powf(10, 1/(s[i] - '0'));
+        }
+    return val/power;
+  }
+
+  return val;
 }
